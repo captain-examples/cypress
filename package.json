@@ -1,0 +1,22 @@
+{
+  "name": "captain-example-with-cypress",
+  "version": "1.0.0",
+  "description": "Reference Implementation for running cypress tests via github actions and uploading the results to captain",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/captain-examples/cypress.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/captain-examples/cypress/issues"
+  },
+  "homepage": "https://github.com/captain-examples/cypress#readme",
+  "devDependencies": {
+    "cypress": "10.10.0",
+    "mocha-junit-reporter": "2.1.0",
+    "mocha-multi-reporters": "1.5.1"
+  }
+}

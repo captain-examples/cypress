@@ -1,0 +1,31 @@
+name: 'captain CI example'
+on:
+  pull_request:
+  push:
+    paths-ignore:
+      - README.md
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run Cypress
+        uses: cypress-io/github-action@v4
+        with:
+          browser: chrome
+          config: "video=false"
+      - name: Upload test results to Captain
+        uses: rwx-research/upload-captain-artifact@v1
+        if: always()
+        continue-on-error: true
+        with:
+          artifacts: |
+            [
+              {
+                "name": "Cypress",
+                "path": "tmp/junit/*.xml",
+                "kind": "test_results",
+                "parser": "cypress_junit_xml"
+              }
+            ]
+          captain-token: '${{ secrets.CAPTAIN_API_TOKEN }}'
