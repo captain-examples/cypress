@@ -41,7 +41,7 @@ Take a look at the [final workflow][workflow-with-captain], [Cypress configurati
 
 For more information on the github action, see [its readme][action-readme].
 
-[captain-access-tokens]: https://captain.build/deep_link/manage/access_tokens
+[captain-access-tokens]: https://account.rwx.com/deep_link/manage/access_tokens
 [create-api-token-docs]: https://www.rwx.com/captain/docs/api-tokens#generating-an-api-token
 [workflow-with-captain]: https://github.com/captain-examples/cypress/blob/main/.github/workflows/ci.yml
 [cypress-configuration]: https://github.com/captain-examples/cypress/blob/main/cypress.config.js
