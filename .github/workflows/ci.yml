@@ -1,4 +1,4 @@
-name: 'captain CI example'
+name: 'Captain CI example'
 on:
   pull_request:
   push:
@@ -9,23 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: rwx-research/setup-captain@v1
       - name: Run Cypress
         uses: cypress-io/github-action@v4
         with:
           browser: chrome
           config: "video=false"
-      - name: Upload test results to Captain
-        uses: rwx-research/upload-captain-artifact@v1
-        if: always()
-        continue-on-error: true
-        with:
-          artifacts: |
-            [
-              {
-                "name": "Cypress",
-                "path": "tmp/junit/*.xml",
-                "kind": "test_results",
-                "parser": "cypress_junit_xml"
-              }
-            ]
-          captain-token: '${{ secrets.CAPTAIN_API_TOKEN }}'
+          command-prefix: "captain run --suite-id captain-examples-cypress --test-results \"tmp/junit/*.xml\" --"
+        env:
+          RWX_ACCESS_TOKEN: ${{ secrets.RWX_ACCESS_TOKEN }}
