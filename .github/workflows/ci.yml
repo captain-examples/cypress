@@ -7,6 +7,11 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        partition_index: [0, 1]
+        partition_total: [2]
     steps:
       - uses: actions/checkout@v3
       - uses: rwx-research/setup-captain@v1
@@ -15,6 +20,21 @@ jobs:
         with:
           browser: chrome
           config: "video=false"
-          command-prefix: "captain run --suite-id captain-examples-cypress --test-results \"tmp/junit/*.xml\" --"
+          command-prefix: |
+            test_files=$(
+              captain partition \
+              --suite-id captain-examples-cypress \
+              --index ${{ matrix.partition_index }} \
+              --total ${{ matrix.partition_total }} \
+              --delimiter ',' \
+              "cypress/**/*.cy.js"
+            )
+            captain run \
+              --suite-id captain-examples-cypress \
+              --test-results "tmp/junit/*.xml" \
+              --language JavaScript \
+              --framework Cypress \
+              --github-job-matrix '${{ toJSON(matrix) }}' \
+              --
         env:
           RWX_ACCESS_TOKEN: ${{ secrets.RWX_ACCESS_TOKEN }}
