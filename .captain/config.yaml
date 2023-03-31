@@ -1,0 +1,4 @@
+test-suites:
+  captain-examples-cypress:
+    results:
+      path: tmp/junit/*.xml
