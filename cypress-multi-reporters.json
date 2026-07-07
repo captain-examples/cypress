@@ -1,6 +1,7 @@
 {
-  "reporterEnabled": "spec,mocha-junit-reporter",
-  "mochaJunitReporterReporterOptions": {
-    "mochaFile": "./tmp/junit/[hash].xml"
+  "reporterEnabled": "spec,@rwx-cloud/cypress-rwx-reporter",
+  "rwxCloudCypressRwxReporterReporterOptions": {
+    "outputFile": "./tmp/junit/[hash].xml",
+    "screenshotsFolder": "./tmp/cypress_screenshots"
   }
 }

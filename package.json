@@ -15,8 +15,8 @@
   },
   "homepage": "https://github.com/captain-examples/cypress#readme",
   "devDependencies": {
-    "cypress": "10.10.0",
-    "mocha-junit-reporter": "2.1.0",
-    "mocha-multi-reporters": "1.5.1"
+    "@rwx-cloud/cypress-rwx-reporter": "^1.0.0",
+    "@rwx-research/mocha-multi-reporters": "^1.5.2",
+    "cypress": "15.18.0"
   }
 }

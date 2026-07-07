@@ -1,0 +1,43 @@
+on:
+  cli:
+    init:
+      commit-sha: ${{ event.git.sha }}
+  github:
+    pull_request:
+      init:
+        commit-sha: ${{ event.git.sha }}
+
+base:
+  image: ubuntu:24.04
+  config: rwx/base 1.1.1
+
+tasks:
+  - key: code
+    call: git/clone 2.0.8
+    with:
+      repository: https://github.com/captain-examples/cypress.git
+      ref: ${{ init.commit-sha }}
+
+  - key: node
+    call: nodejs/install 1.1.14
+    with:
+      node-version: 24.18.0
+
+  - key: chrome
+    call: google/install-chrome 2.1.10
+    with:
+      chrome-version: stable
+
+  - key: deps
+    use: [code, node]
+    run: npm ci
+    filter:
+      - package.json
+      - package-lock.json
+
+  - key: captain
+    call: rwx/install-captain 1.1.7
+
+  - key: cypress
+    use: [deps, chrome, captain]
+    run: captain run captain-examples-cypress -c "npx cypress run --browser chrome-for-testing"

@@ -4,7 +4,7 @@ module.exports = defineConfig({
   screenshotsFolder: "tmp/cypress_screenshots",
   videosFolder: "tmp/cypress_videos",
   trashAssetsBeforeRuns: false,
-  reporter: "mocha-multi-reporters",
+  reporter: "@rwx-research/mocha-multi-reporters",
   reporterOptions: {
     configFile: "cypress-multi-reporters.json",
   },
